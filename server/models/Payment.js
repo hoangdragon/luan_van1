@@ -21,17 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         status_payment: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            defaultValue: 0
         },
     }, {
         timestamps: false
     })
-    Payment.associate = (models) => {
-        Payment.belongsTo(models.PostSoft, {
-            foreignKey: 'id_postsoft'
-        },
-            { onDelete: "cascade" });
-    };
+   
    
     return Payment
 }

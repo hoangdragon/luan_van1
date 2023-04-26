@@ -44,20 +44,5 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     })
 
-    PostSoft.associate = (models) => {
-        PostSoft.belongsTo(models.Account, {
-            foreignKey: 'username'
-        });
-    };
-    PostSoft.associate = (models) => {
-        PostSoft.belongsTo(models.Category, {
-            foreignKey: 'category_id'
-        });
-    };
-    PostSoft.associate = (models) => {
-        PostSoft.hasMany(models.Payment, {
-            foreignKey: 'id_postsoft'
-        });
-    };
     return PostSoft
 }

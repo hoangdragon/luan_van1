@@ -3,6 +3,7 @@ const router = express.Router()
 const multer = require('multer');
 
 const { PostSoft } = require('../models')
+const { Category } = require('../models')
 const path = require('path');
 //const { verify } = require('crypto');
 const verifyToken = require('../middleware/auth');
@@ -35,8 +36,9 @@ router.get('/', verifyToken, async (req, res) => {
   try {
     const postsoft = await PostSoft.findAll({
       where: { username: req.username }
+     
     })
-    
+
     res.json({ success: true, postsoft })
   } catch (error) {
     console.log(error)
@@ -46,20 +48,21 @@ router.get('/', verifyToken, async (req, res) => {
 })
 //post 1 soft
 router.post('/', verifyToken, upload.fields([
-  {name: 'image1', maxCount: 1},
-  {name: 'file_zip', maxCount: 1},
+  { name: 'image', maxCount: 1 },
+  { name: 'file_zip', maxCount: 1 },
 ])
-,async (req, res) => {
-    const { username, name, price, description } = req.body;
+  , async (req, res) => {
+    const { username, name, category_id, price, description } = req.body;
     try {
       const newPost = await PostSoft.create({
         username: username,
         name: name,
+        category_id: category_id,
         price: price,
         description: description,
-        image: req.files['image1'][0].filename,
+        image: req.files['image'][0].filename,
         file_zip: req.files['file_zip'][0].filename
-        
+
       });
       res.status(201).json({ success: true, message: 'thanh cong', postsoft: newPost })
     } catch (error) {

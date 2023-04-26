@@ -52,6 +52,7 @@ router.get('/', verifyToken, async (req, res) => {
   }
 })
 router.get('/username', verifyToken, async (req, res) => {
+  // console.log('123', req.username)
   try {
     const profile = await AccountProfile.findOne({
       where: { username: req.username }
@@ -87,7 +88,7 @@ router.post('/', verifyToken, upload.fields([
       avatar: req.files['avatar'][0].filename,
       student: req.files['student'][0].filename
     })
-    return res.status(201).json({ success: true, message: 'Chỉnh sửa thông tin cá nhân thành công' })
+    return res.status(201).json({ success: true, message: 'Chỉnh sửa thông tin cá nhân thành công', profile })
 
   } catch (error) {
     console.log(error)

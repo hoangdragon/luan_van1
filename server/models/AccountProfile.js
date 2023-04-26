@@ -38,11 +38,6 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false
     })
-    AccountProfile.associate = (models) => {
-        AccountProfile.belongsTo(models.Account, {
-            foreignKey: 'username'
-        },
-            { onDelete: "cascade" });
-    };
+
     return AccountProfile
 }

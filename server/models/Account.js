@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        role: {
+        role_id: {
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
@@ -21,23 +21,5 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false
     })
-   Account.associate = (models) => {
-        Account.hasMany(models.PostSoft, {
-            foreignKey: 'username'
-        },
-            { onDelete: "cascade" });
-    };
-    Account.associate = (models) => {
-        Account.hasOne(models.AccountProfile, {
-            foreignKey: 'username'
-        },
-            { onDelete: "cascade" });
-    };
-    Account.associate = (models) => {
-        Account.belongsTo(models.Role, {
-            foreignKey: 'role_id'
-        },
-            { onDelete: "cascade" });
-    };
     return Account
 }

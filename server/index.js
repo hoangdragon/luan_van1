@@ -5,6 +5,9 @@ const cors = require('cors')
 app.use(express.json())
 app.use(cors())
 
+const categoryRouter = require('./routes/Category')
+app.use('/api/category', categoryRouter)
+
 const postSoftRouter = require('./routes/PostSoft')
 app.use('/api/postsoft', postSoftRouter)
 
